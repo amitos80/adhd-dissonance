@@ -24,7 +24,7 @@
     "crypto": "0.0.3",
     "express": "^4.12.3",
     "express-session": "^1.11.1",
-    "feathers": "^1.1.0-pre.0",
+    "feathers": "1.1.1",
     "feathers-hooks": "^0.5.0",
     "feathers-memory": "^0.3.4",
     "feathers-passport": "git+https://github.com/ListnPlay/feathers-passport.git",
@@ -37,7 +37,7 @@
     "primus": "^3.0.2",
     "primus-emitter": "^3.1.0",
     "q": "^1.2.0",
-    "riot": "^2.0.14",
+    "riot": "2.3.12",
     "underscore": "^1.8.3",
     "ws": "^0.7.1"
   }
