@@ -49,8 +49,12 @@ gulp.task('less', ['css'], function() {
         .pipe(gulp.dest('build/app'))
 });
 
+gulp.task('static', function() {
+    return gulp.src('static/**/*.*')
+        .pipe(gulp.dest('public/'));
+});
 
-gulp.task('public',['public-css','public-lib','browserify'], function() {
+gulp.task('public',['public-css','public-lib','browserify', 'static'], function() {
     return gulp.src('build/client/bundle.js')
         .pipe(gulp.dest('public/build/client'));
 });

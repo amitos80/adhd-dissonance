@@ -19,10 +19,14 @@ export default class MainStore extends Store {
             this.trigger("main_state_updated", "mall");
         });
 
+        this.on("sound_detected", (data) => {
+            //console.log('MainStore on: sound_detected, level = ', data.level)
+            this.trigger("sound_update", data);
+        });
+
         this.on("motion_detected", (data) => {
-            console.log('MainStore on: motion_detected, numPoints = ', data.numPoints)
-            //console.log('MainStore on: motion_detected, diffRed = ', data.diffRed, ' diffGreen = ', data.diffRed, ' diffBlue = ', data.diffBlue)
-            //this.trigger("main_state_updated", "mall");
+            //console.log('MainStore on: motion_detected, numPoints = ', data.numPoints)
+            this.trigger("motion_update", data);
         });
 
 

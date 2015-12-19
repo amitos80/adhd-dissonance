@@ -4,22 +4,40 @@ import util from '../util/misc.js';
 import accountStatus from './account-status';
 import mall from './mall';
 import login from './login';
+import videoPlayer from './video-player';
 
 componentFactory.createComponent('main', `
 
-<!--account-status></account-status>
-<mall if={stores.main.state=='mall'}></mall>
-<login if={stores.main.state=='login'}></login-->
+<div class="player-container">
+    <video-player></video-player>
+</div>
 
-<video id="webcam-input" autoplay width="640" height="480"></video>
-<canvas id="canvas-source" width="640" height="480"></canvas>
-<canvas id="canvas-blended" width="640" height="480"></canvas>
+
+<div class="camera-container">
+    <video id="webcam-input" autoplay width="640" height="480"></video>
+    <canvas id="canvas-source" width="640" height="480"></canvas>
+    <canvas id="canvas-blended" width="640" height="480"></canvas>
+</div>
+
 
 
 <style>
     main {
         display: block;
         background-color: #f2f2f2;
+
+        .camera-container {
+            margin-top: 200px;
+        }
+
+        .player-container {
+            margin-top: 50px;
+        }
+
+        video-player {
+            display: block;
+            margin: auto;
+        }
     }
 
 </style>
@@ -31,7 +49,6 @@ componentFactory.createComponent('main', `
 
     this.on('mount', () => {
         console.log("Main mounted");
-        let MIC_THRESHOLD = 0.095;
 
         this.initMic = function(){
             console.log('init p5')
@@ -50,12 +67,10 @@ componentFactory.createComponent('main', `
             }
 
             window.draw = function() {
-
                 // Get the overall volume (between 0 and 1.0)
                 var vol = mic.getLevel();
-
-                if(vol > MIC_THRESHOLD){
-
+                if(self.shouldFireEvents){
+                    self.dispatcher.trigger('sound_detected', {level: vol});
                 }
 
             }
@@ -258,9 +273,8 @@ componentFactory.createComponent('main', `
                     }
                 }
 
-                if(numPoints){
-
-                    self.dispatcher.trigger('motion_detected', {change: change, numPoints: numPoints});
+                if(self.shouldFireEvents){
+                    self.dispatcher.trigger('motion_detected', {numPoints: numPoints});
                 }
             }
 
@@ -293,6 +307,11 @@ componentFactory.createComponent('main', `
                 window.requestAnimationFrame(recursiveCanvasUpdate);
             }
         }
+
+
+        setTimeout(()=>{
+            self.shouldFireEvents = true;
+        }, 5000)
     });
 
     this.dispatcher.on('main_state_updated', () => {
