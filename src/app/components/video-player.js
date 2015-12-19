@@ -126,6 +126,8 @@ componentFactory.createComponent('video-player', `
                 console.log('SHOULD PAUSE')
                 if(this.lastUpdatedMotionPoints == 0){
                     this.timesNoMotionsDetected++;
+                }else{
+                    this.timesNoMotionsDetected = 0;
                 }
 
                 if(this.timesNoMotionsDetected > 9){
