@@ -18,6 +18,15 @@ export default class MainStore extends Store {
             this.state ='mall';
             this.trigger("main_state_updated", "mall");
         });
+
+        this.on("motion_detected", (data) => {
+            console.log('MainStore on: motion_detected, numPoints = ', data.numPoints)
+            //console.log('MainStore on: motion_detected, diffRed = ', data.diffRed, ' diffGreen = ', data.diffRed, ' diffBlue = ', data.diffBlue)
+            //this.trigger("main_state_updated", "mall");
+        });
+
+
+
     }     
 
 };
