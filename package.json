@@ -38,6 +38,7 @@
     "primus-emitter": "^3.1.0",
     "q": "^1.2.0",
     "riot": "2.3.12",
+    "sound-detection": "0.0.3",
     "underscore": "^1.8.3",
     "ws": "^0.7.1"
   }

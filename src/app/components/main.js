@@ -28,10 +28,43 @@ componentFactory.createComponent('main', `
  function(opts) {
      let self = this;
 
+
     this.on('mount', () => {
         console.log("Main mounted");
+        let MIC_THRESHOLD = 0.095;
 
-        if(util.isBrowser()){
+        this.initMic = function(){
+            console.log('init p5')
+            let input;
+            let analyzer;
+            let mic;
+
+            window.setup = function() {
+                console.log('p5 setup')
+                // Create an Audio input
+                mic = new p5.AudioIn();
+
+                // start the Audio Input.
+                // By default, it does not .connect() (to the computer speakers)
+                mic.start();
+            }
+
+            window.draw = function() {
+
+                // Get the overall volume (between 0 and 1.0)
+                var vol = mic.getLevel();
+
+                if(vol > MIC_THRESHOLD){
+
+                }
+
+            }
+        }
+
+     if(util.isBrowser()){
+
+         this.initMic();
+
 
             function getElById(id){
                 return document.getElementById(id);
