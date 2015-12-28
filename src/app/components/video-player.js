@@ -93,16 +93,18 @@ function(opts) {
         }
     });
 
-    let UPDATE_VIDEO_INTERVAL = 300;
+    let UPDATE_VIDEO_INTERVAL = 150;
     let RESTART_VIDEO_INTERVAL = 600000;
-    let SOUND_LEVEL_THRESHOLD = 0.002;
-    let MOTION_DETECTION_THRESHOLD = 9;
+    //let SOUND_LEVEL_THRESHOLD = 0.0089;
+    let SOUND_LEVEL_THRESHOLD = 0.06;
+    let MOTION_POINTS_THRESHOLD = 15;
+    let MOTION_DETECTION_THRESHOLD = 4;
 
     this.lastPlayTs = 0;
     this.timesNoMotionsDetected = 0;
     this.handleEvents = () => {
         console.log('video-player.handleEvents:  this.lastUpdatedMotionPoints = ', this.lastUpdatedMotionPoints, ' this.lastUpdatedSoundLevel = ', this.lastUpdatedSoundLevel);
-        if(this.lastUpdatedMotionPoints > 0 && this.lastUpdatedSoundLevel > SOUND_LEVEL_THRESHOLD){
+        if(this.lastUpdatedMotionPoints > MOTION_POINTS_THRESHOLD && this.lastUpdatedSoundLevel > SOUND_LEVEL_THRESHOLD){
             console.log('SHOULD PLAY')
             self.lastPlayTs = new Date().getTime();
             if(vjsPlayer && vjsPlayer.paused()){

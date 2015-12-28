@@ -15,8 +15,9 @@ componentFactory.createComponent('main', `
 
 <div class="camera-container">
     <video id="webcam-input" autoplay width="640" height="480"></video>
-    <canvas id="canvas-source" width="640" height="480"></canvas>
     <canvas id="canvas-blended" width="640" height="480"></canvas>
+    <canvas id="canvas-source" width="640" height="480"></canvas>
+
 </div>
 
 
@@ -318,3 +319,10 @@ componentFactory.createComponent('main', `
         this.update();
     });
 });
+
+/*
+TODO
+1. add sliders for thresholds
+2. add input for youtube url
+
+ */
